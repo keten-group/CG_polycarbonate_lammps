@@ -33,6 +33,7 @@ Angles
 
 Dihedrals
 - Tabulated style: https://docs.lammps.org/dihedral_table.html
+- File: ABAC_dihedral_avg_potential.table
 - IMPORTANT: see notes on dihedral potential below
 
 
