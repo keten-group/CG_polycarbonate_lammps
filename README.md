@@ -40,7 +40,7 @@ Dihedrals
 - File: ABAC_dihedral_avg_potential.table
 - IMPORTANT: see notes on dihedral potential below
 
-**Notes on the dihedral potential**: The dihedral potential is not the most stable. When the simulation is running at high temps (e.g. 750 K) while using the dihedral potential, it will almost always crash with a "bond atoms missing" or similar error. This is not reproducable on a restart. Since polymer equilibration is much less time-consuming at high temperatures, the best solution seems to be to simply turn off the dihedral potential while in this portion of the simulation. It can be resinstated at 300 K followed by a short low-temp equilibration. For completion, below is a list of other attempted solutions; however, we have had no issues from turning the dihedral off at high temps.
+**Notes on the dihedral potential**: The dihedral potential is not the most stable. When the simulation is running at high temps (e.g. 750 K) while using the dihedral potential, it will almost always crash with a "bond atoms missing" or similar error. This is not reproducable on a restart. Since polymer equilibration is much less time-consuming at high temperatures, the best solution seems to be to simply turn off the dihedral potential while in this portion of the simulation. It can be resinstated at 300 K followed by a short low-temp equilibration. For completion, below is a list of other attempted solutions; however, we have had no issues from turning the dihedral off at high temps. If the errors persist, we recommend lowering the timestep to 1 fs.
 
 Things that helped bit:
 - Using shorter polymer chains
