@@ -29,6 +29,10 @@ Bonds
 
 Angles
 - Tabulated style: https://docs.lammps.org/angle_table.html
+- Files:
+  - ABA_angle_avg_potential.table
+  - BAC_angle_avg_potential.table
+  - ACA_angle_avg_potential.table
 - Note: the tabulated potentials are fairly irregular and are not well approximated by harmonic functions.
 
 Dihedrals
