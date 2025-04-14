@@ -1,0 +1,151 @@
+### LAMMPS Input file for Coarse Grained PC relaxation ###
+# Author: Heather L. White
+# Affiliation: Dept. of Mechanical Engineering, Northwestern University
+# Date: April 14, 2025
+# Note: This is a very long simulation which may need to be broken into smaller parts
+
+# Required files
+# - initial.data (initial structure in LAMMPS format)
+# - ABA_angle_avg_potential.table (angle potential)
+# - BAC_angle_avg_potential.table (angle potential) 
+# - ACA_angle_avg_potential.table (angle potential) 
+
+# Required folders
+# - equil_data (to catch output trajectory files)
+###########################################################
+
+units real                 
+atom_style full
+boundary p p p
+read_data initial.data         
+timestep 4.0
+neighbor 2.0 bin        
+neigh_modify every 1 delay 0 check yes
+
+# Bond potential
+bond_style     morse ### Optimized from harmonic
+bond_coeff     1 0 0 0
+bond_coeff     2 55.511 0.853 2.897 #AB
+bond_coeff     3 55.511 0.853 2.897 #BA
+bond_coeff     4 312.924 0.599 3.425 #AC
+bond_coeff     5 312.924 0.599 3.425 #CA
+
+# Angle potential
+angle_style hybrid harmonic table linear 361
+angle_coeff    1 harmonic 409.40 120
+angle_coeff    2 table ABA_angle_avg_potential.table Angle
+angle_coeff    3 table BAC_angle_avg_potential.table Angle
+angle_coeff    4 table ACA_angle_avg_potential.table Angle
+angle_coeff    5 table BAC_angle_avg_potential.table Angle
+
+# Dihedral potential
+dihedral_style none
+
+# Soft relaxation non-bonded parameters
+pair_style soft 10
+pair_coeff 1 1 0 0		# Developmental artifact - ignore
+pair_coeff 2 2 0 0		# Developmental artifact - ignore
+pair_coeff 3 3 0 6.881	#AA
+pair_coeff 4 4 0 5.295	#BB
+pair_coeff 5 5 0 6.881	#AA
+pair_coeff 6 6 0 3.837	#CC
+pair_modify shift yes mix arithmetic
+special_bonds lj 0.0 0.0 1.0
+
+# Thermo output
+thermo 1000      
+thermo_style custom step temp etotal epair ebond eangle edihed ke pxx pyy pzz lx ly lz vol density       
+
+### Dump for all
+dump mydump all custom 50000 equil_data/Conf_*.dat id type xu yu zu vx vy vz
+dump_modify mydump sort id
+
+minimize 1.0e-4 1.0e-6 10000 10000
+reset_timestep 0
+velocity all create 300 123456 rot yes
+velocity all zero linear
+
+#######################
+### Soft relaxation ###
+#######################
+
+# Walls on fixed boundary
+
+variable prefactor equal ramp(0,300)
+fix softeq all adapt 1 pair soft a * * v_prefactor 
+fix nvtSoft all nvt temp 300 300 100
+run 500000
+unfix nvtSoft
+unfix softeq
+
+###########################################################
+### Restore full pair potential; Relax at 750K 1000 atm ###
+###########################################################
+
+#LJ parameter
+pair_style lj/cut 15.0
+pair_coeff 1 1 0 0		  	# Developmental artifact - ignore
+pair_coeff 2 2 0 0			# Developmental artifact - ignore
+pair_coeff 3 3 0.345 6.130 	#AA
+pair_coeff 4 4 2.087 4.717 	#BB
+pair_coeff 5 5 0.345 6.130 	#AA
+pair_coeff 6 6 1.822 3.418 	#CC
+pair_modify shift yes mix arithmetic
+special_bonds lj 0.0 0.0 1.0
+
+# Thermo output
+thermo 1000      
+thermo_style custom step temp etotal epair ebond eangle edihed ke pxx pyy pzz lx ly lz vol density       
+
+### Dump for all
+dump mydump all custom 250000 equil_data/Conf_*.dat id type xu yu zu vx vy vz
+dump_modify mydump sort id
+
+fix npt750 all npt temp 750 750 400 iso 1000 1000 4000
+# 300 ns for 20 monomers, 500 ns for 50, 600 ns for 80, 700 ns for 100
+run 75000000 
+unfix npt750
+
+###########################
+### Replicate as needed ###
+###########################
+
+replicate 2 2 2
+minimize 1.0e-4 1.0e-6 10000 10000
+
+##############################################
+### More 750K, 1000 atm relaxation - 10 ns ###
+##############################################
+
+fix npt750 all npt temp 750 750 400 iso 1000 1000 4000
+run 2500000
+unfix npt750
+
+####################################
+### Cool to 300K, 0 atm for 2 ns ###
+####################################
+
+fix npt300 all npt temp 300 300 400 iso 0 0 4000
+run 500000
+unfix npt300
+
+#############################
+### Turn on bond breaking ###
+#############################
+
+# Bond breaking
+fix BondBreakAB all bond/break 1 2 3.7
+fix BondBreakBA all bond/break 1 3 3.7
+fix BondBreakAC all bond/break 1 4 4.6
+fix BondBreakCA all bond/break 1 5 4.6
+fix scissionData all ave/time 1 1 10 f_BondBreakAB[2] f_BondBreakBA[2] f_BondBreakAC[2] f_BondBreakCA[2] file bond_break_ITER.dat
+
+fix npt300 all npt temp 300 300 400 iso 0 0 4000
+run 250000
+unfix npt300
+
+write_restart restarts/RESTART_TO_WRITE.restart
+write_data PC_rep_and_equil.data nocoeff
+
+print "All done"
+quit
