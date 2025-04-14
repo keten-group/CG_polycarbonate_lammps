@@ -1,5 +1,6 @@
 # Coarse-grained (CG) polycarbonate (PC) molecular model
 Materials for using Keten Group's coarse-grained polycarbonate model in LAMMPS
+
 Last updated 04/14/2025 by Heather White
 
 ## CG PC model description
