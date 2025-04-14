@@ -4,6 +4,7 @@ Materials for using Keten Group's coarse-grained polycarbonate model in LAMMPS
 Last updated 04/14/2025 by Heather White
 
 Source publications
+- White, H., et al., Characterizing the Mechanical Response of a Polycarbonate Coarse-Grained Model Developed with Energy Renormalization. Macromolecules (2025). (DOI to be established on publication.)
 - Wenjie Xia et al., Energy renormalization for coarse-graining polymers having different segmental structures. Science Advances (2019). DOI:10.1126/sciadv.aav4683
 
 Related publications
