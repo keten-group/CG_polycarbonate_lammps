@@ -45,5 +45,21 @@ Dihedrals
 
 **Notes on the dihedral potential**: The PC molecules exhibit such high linearity that occasionally a dihedral angle is undefined. This produces extremely high forces that causes crashes with a "bond atoms missing" or similar error. This is not reproducable on a restart. The contribution of the dihedral potentials to the overall system is negligible and we recommend that these terms are neglected. 
 
+## Structure generation
+
+The Python 3 script CG_PC_RandomWalk.py is provided for generating a LAMMPS input file defining CG PC. Please see the description at the top of the file for more information and contact if a question persists.
+
+## LAMMPS input scripts
+
+The following files are provided for relaxation and tensile tests on the CG PC model:
+- equil.in
+- tensile_NPT.in
+- tensile_NVT.in
+
+If the comments within do not satisfy questions, please read the methodology descriptions in (White, H., et al. 2025). Please contact if a question persists,
+
+## Contact
+
+For questions not answered by the provided materials, please contact Heather White at heatherosa37@gmail.com.
 
 
