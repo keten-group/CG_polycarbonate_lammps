@@ -5,7 +5,7 @@
 # Note: This is a very long simulation which may need to be broken into smaller parts
 
 # Required files
-# - initial.data (initial structure in LAMMPS format)
+# - initial.data (relaxed structure in LAMMPS format)
 # - ABA_angle_avg_potential.table (angle potential)
 # - BAC_angle_avg_potential.table (angle potential) 
 # - ACA_angle_avg_potential.table (angle potential) 
