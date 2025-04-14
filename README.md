@@ -56,7 +56,7 @@ The following files are provided for relaxation and tensile tests on the CG PC m
 - tensile_NPT.in
 - tensile_NVT.in
 
-If the comments within do not satisfy questions, please read the methodology descriptions in (White, H., et al. 2025). Please contact if a question persists,
+If the comments within do not satisfy questions, please read the methodology descriptions in (White, H., et al. 2025). Please contact if a question persists.
 
 ## Contact
 
