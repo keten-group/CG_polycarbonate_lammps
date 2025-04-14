@@ -62,6 +62,6 @@ If the comments within do not satisfy questions, please read the methodology des
 
 ## Contact
 
-For questions not answered by the provided materials, please contact Heather White at heatherosa37@gmail.com.
+For questions not answered by the provided materials, please contact Heather White at heatherosa37@gmail.com or the Keten Lab (https://keten-group.northwestern.edu/).
 
 
