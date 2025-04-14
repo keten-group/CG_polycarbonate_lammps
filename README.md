@@ -1,7 +1,8 @@
-# CG_polycarbonate
+# Coarse-grained (CG) polycarbonate (PC) molecular model
 Materials for using Keten Group's coarse-grained polycarbonate model in LAMMPS
-
 Last updated 04/14/2025 by Heather White
+
+## CG PC model description
 
 Source publications
 - White, H., et al., Characterizing the Mechanical Response of a Polycarbonate Coarse-Grained Model Developed with Energy Renormalization. Macromolecules (2025). (DOI to be established on publication.)
@@ -23,11 +24,11 @@ Masses
 - C: 60.0 g/mol
 
 Bonds
-- Harmonic style: https://docs.lammps.org/bond_harmonic.html
+- Morse style: https://docs.lammps.org/bond_morse.html
 - Parameters
-  - A-B / B-A: $K$ = 40.4 kcal/&#197;<sup>2</sup> , $r_0$ = 2.897 &#197;
-  - A-C / C-A: $K$ = 112.3 kcal/&#197;<sup>2</sup>, $r_0$ = 3.425 &#197;
-
+  - A-B / B-A: $D$ = 55.511 kcal/mol, $\alpha$ = 0.853 &#197;<sup>-1</sup>, $r_0$ = 2.897 &#197;      
+  - A-C / C-A: $D$ = 312.924 kcal/mol, $\alpha$ = 0.599 &#197;<sup>-1</sup>, $r_0$ = 2.897 &#197;  
+                         
 Angles
 - Tabulated style: https://docs.lammps.org/angle_table.html
 - Files:
