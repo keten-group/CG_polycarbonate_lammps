@@ -17,6 +17,8 @@ Last updated 04/14/2025 by Heather White
 
 Polycarbonate is coarse-grained in a 3-bead representation as shown in the figure below. In previously developed materials, it is not uncommon for the beads 'A', 'B', and 'C' to be referred to as 'P', 'C', and 'O', respectively, so take care in keeping track of what naming convention is being used. For the purposes of this documentation, the 'ABC' representation will be used exclusively to avoid confusion. 
 
+**NOTE: While this is a 3-bead representation, the associated files distinguish the first "A" bead in the PC monomer as Type 3 and the second as Type 5. They have identical properties. **
+
 ![image](https://github.com/keten-group/CG_polycarbonate/assets/55956937/ac579c5d-4e85-4da8-b5ab-d4349ed5bf8b)
 
 **Masses**
